@@ -1,17 +1,17 @@
 .card__items {
-    list-style-type: none;
-    display: grid;
-    grid-template-columns: 282px 282px 282px;
-    gap: 20px 17px;
-    margin: 0;
-    padding: 0;
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: 282px 282px 282px;
+  gap: 20px 17px;
+  margin: 0;
+  padding: 0;
 
-    justify-content: center;
+  justify-content: center;
 }
 
 @media screen and (max-width: 1023px) {
-    .card__items {
-        grid-template-columns: 282px;
-        gap: 20px;
-    }
+  .card__items {
+    grid-template-columns: 282px;
+    gap: 20px;
+  }
 }

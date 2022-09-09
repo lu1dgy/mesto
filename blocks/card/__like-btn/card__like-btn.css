@@ -3,10 +3,11 @@
   height: 19px;
   align-self: center;
   background-image: url(../../../images/like.svg);
-  background-position: center;
   background-repeat: no-repeat;
-  border: 0;
+  background-position: center;
+  background-size: 22px 19px;
   background-color: #fff;
+  border: 0;
   padding: 0;
 }
 
