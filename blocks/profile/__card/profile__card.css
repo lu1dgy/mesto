@@ -1,7 +1,7 @@
 .profile__card {
     display: flex;
     flex-direction: row;
-    gap: 30px
+    gap: 30px;
 }
 
 @media screen and (max-width: 1023px) {
