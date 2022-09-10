@@ -1,4 +1,4 @@
-.card__like-btn {
+.card-item__like-btn {
   width: 22px;
   height: 19px;
   align-self: center;
@@ -11,6 +11,7 @@
   padding: 0;
 }
 
-.card__like-btn:hover {
+.card-item__like-btn:hover {
   opacity: .5;
+  cursor: pointer;
 }
