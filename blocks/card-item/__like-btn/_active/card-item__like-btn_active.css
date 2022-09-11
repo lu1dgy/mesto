@@ -1,1 +1,14 @@
-.card-item_like_active {}
+.card-item__like-btn_active {
+  width: 22px;
+  height: 19px;
+  align-self: center;
+  background-image: url(../../../../images/like-active.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 22px 19px;
+  background-color: #fff;
+  border: 0;
+  padding: 0;
+  flex-shrink: 0;
+  cursor: pointer;
+}

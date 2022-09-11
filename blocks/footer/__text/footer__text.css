@@ -8,7 +8,7 @@
 }
 
 @media screen and (max-width: 1023px) {
-  .header {
+  .footer__text {
     font-size: 14px;
     line-height: 17px;
   }
