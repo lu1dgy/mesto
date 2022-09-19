@@ -63,7 +63,7 @@ function openPhotoPopup(event) {
 }
 //запускает 6 карточек на страницу при загрузке из массива initialCards
 initialCards.forEach(item => {
-  list.prepend(createCard(item.name, item.link));
+  list.append(createCard(item.name, item.link));
 })
 
 function createCard(name, link) {
