@@ -10,6 +10,7 @@
   border-radius: 10px;
   position: relative;
   padding: 34px 36px 37px;
+  z-index: 2;
 }
 
 @media screen and (max-width: 1023px) {

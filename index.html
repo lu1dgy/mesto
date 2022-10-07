@@ -40,22 +40,40 @@
     <div class="popup__container">
       <button type="button" class="popup__close-btn"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form name="dataForm" class="popup__form">
-        <input name="name" id="profile-name" type="text" class="popup__text ">
-        <input name="role" id="profile-role" type="text" class="popup__text ">
-        <button type="submit" class="popup__save-btn">Сохранить</button>
+      <form name="dataForm" class="popup__form popup__form_type_name" novalidate>
+        <label class="popup__label">
+          <input minlength="2" maxlength="40" name="name" id="profile-name" type="text" class="popup__text " required>
+          <span class="popup__input-error profile-name-error"></span>
+        </label>
+        <label class="popup__label">
+          <input minlength="2" maxlength="200" name="role" id="profile-role" type="text" class="popup__text " required>
+          <span class="popup__input-error profile-role-error"></span>
+        </label>
+        <button type="submit" class="popup__button popup__save-btn">Сохранить</button>
       </form>
+    </div>
+    <div class="popup__overlay">
     </div>
   </div>
   <div class="popup popupAddForm">
     <div class="popup__container">
       <button type="button" class="popup__close-btn"></button>
       <h2 class="popup__title">Новое место</h2>
-      <form name="dataForm" class="popup__form popup__form_type_photo">
-        <input name="description" id="profile-description" type="text" class="popup__text" placeholder="Название">
-        <input name="photo" id="profile-photo" type="text" class="popup__text" placeholder="Ссылка на картинку">
-        <button type="submit" class="popup__create-btn">Создать</button>
+      <form name="dataForm" class="popup__form popup__form_type_photo" novalidate>
+        <label class="popup__label">
+          <input name="description" id="profile-description" type="text" class="popup__text" placeholder="Название"
+            required>
+          <span class="popup__input-error profile-description-error"></span>
+        </label>
+        <label class="popup__label">
+          <input name="photo" id="profile-photo" type="url" class="popup__text" placeholder="Ссылка на картинку"
+            required>
+          <span class="popup__input-error profile-photo-error"></span>
+        </label>
+        <button type="submit" class="popup__create-btn popup__button">Создать</button>
       </form>
+    </div>
+    <div class="popup__overlay">
     </div>
   </div>
   <div class="popup popup_type_photo">

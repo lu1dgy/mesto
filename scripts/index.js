@@ -16,6 +16,7 @@ const roleProfile = document.querySelector('.profile__role');
 const list = document.querySelector('.card__items');
 const photo = document.querySelector('.popup__image');
 const photoText = document.querySelector('.popup__image-name');
+const popupOverlay = document.querySelectorAll('.popup__overlay');
 const initialCards = [
   {
     name: 'Архыз',
@@ -44,11 +45,22 @@ const initialCards = [
 ];
 
 function openPopup(popup) {
+  const errorList = Array.from(document.querySelectorAll('.popup__input-error'));
+  const inputList = Array.from(document.querySelectorAll('.popup__text'));
+  inputList.forEach((errorElement) => {
+    errorElement.classList.remove('popup__text_type_error')
+  })
+  errorList.forEach((errorElement) => {
+    errorElement.textContent = '';
+  })
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', handleEscButton);
+
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleEscButton);
 }
 
 // Открывает фотокарточку в полный экран
@@ -117,20 +129,103 @@ function handlePhotoFormSubmit(evt) {
   closePopup(popupAddForm);
 }
 
+function handleEscButton(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened')
+    closePopup(openedPopup);
+  }
+}
+
+function handleOverlayClose() {
+  const openedPopup = document.querySelector('.popup_opened');
+  closePopup(openedPopup);
+}
+
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add('popup__text_type_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('popup__input-error_active');
+};
+
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove('popup__text_type_error');
+  errorElement.classList.remove('popup__input-error_active');
+  errorElement.textContent = '';
+};
+
+const checkInputValidity = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+};
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll('.popup__text'));
+  const button = formElement.querySelector('.popup__button');
+  toggleButtonState(inputList, button);
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener('input', function () {
+      checkInputValidity(formElement, inputElement);
+      toggleButtonState(inputList, button);
+    });
+  });
+}
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll('.popup__form'));
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+    setEventListeners(formElement);
+  });
+}
+
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+}
+
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add('popup__button_inactive');
+    buttonElement.setAttribute('disabled', '');
+  } else {
+    buttonElement.classList.remove('popup__button_inactive');
+    buttonElement.removeAttribute('disabled', '');
+
+  }
+}
+
 editButton.addEventListener('click', function openEditPopup() {
   openPopup(popupEditForm);
   nameInput.value = nameProfile.textContent;
   roleInput.value = roleProfile.textContent;
 });
-addButton.addEventListener('click', () => openPopup(popupAddForm));
+
+addButton.addEventListener('click', () => {
+  openPopup(popupAddForm);
+});
 //При нажатии на кнопку 'крестик' закрывает попап
+
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
 });
+
+
+popupOverlay.forEach((overlay) => {
+  overlay.addEventListener('click', handleOverlayClose)
+})
+
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 photoForm.addEventListener('submit', handlePhotoFormSubmit);
 
-
-
+enableValidation();
 
