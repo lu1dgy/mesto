@@ -141,68 +141,6 @@ function handleOverlayClose() {
   closePopup(openedPopup);
 }
 
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('popup__text_type_error');
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__input-error_active');
-};
-
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('popup__text_type_error');
-  errorElement.classList.remove('popup__input-error_active');
-  errorElement.textContent = '';
-};
-
-const checkInputValidity = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
-};
-
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__text'));
-  const button = formElement.querySelector('.popup__button');
-  toggleButtonState(inputList, button);
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', function () {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, button);
-    });
-  });
-}
-
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
-  formList.forEach((formElement) => {
-    formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
-    setEventListeners(formElement);
-  });
-}
-
-
-const hasInvalidInput = (inputList) => {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  });
-}
-
-const toggleButtonState = (inputList, buttonElement) => {
-  if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('popup__button_inactive');
-    buttonElement.setAttribute('disabled', '');
-  } else {
-    buttonElement.classList.remove('popup__button_inactive');
-    buttonElement.removeAttribute('disabled', '');
-
-  }
-}
-
 editButton.addEventListener('click', function openEditPopup() {
   openPopup(popupEditForm);
   nameInput.value = nameProfile.textContent;
@@ -227,5 +165,49 @@ popupOverlay.forEach((overlay) => {
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 photoForm.addEventListener('submit', handlePhotoFormSubmit);
 
-enableValidation();
+// enableValidation();
 
+
+// const showInputError = (formElement, inputElement, errorMessage) => {
+//   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+//   inputElement.classList.add('popup__text_type_error');
+//   errorElement.textContent = errorMessage;
+//   errorElement.classList.add('popup__input-error_active');
+// };
+
+// const hideInputError = (formElement, inputElement) => {
+//   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+//   inputElement.classList.remove('popup__text_type_error');
+//   errorElement.classList.remove('popup__input-error_active');
+//   errorElement.textContent = '';
+// };
+
+// const checkInputValidity = (formElement, inputElement) => {
+//   if (!inputElement.validity.valid) {
+//     showInputError(formElement, inputElement, inputElement.validationMessage);
+//   } else {
+//     hideInputError(formElement, inputElement);
+//   }
+// };
+
+// const setEventListeners = (formElement) => {
+//   const inputList = Array.from(formElement.querySelectorAll('.popup__text'));
+//   const button = formElement.querySelector('.popup__button');
+//   toggleButtonState(inputList, button);
+//   inputList.forEach((inputElement) => {
+//     inputElement.addEventListener('input', function () {
+//       checkInputValidity(formElement, inputElement);
+//       toggleButtonState(inputList, button);
+//     });
+//   });
+// }
+
+// const enableValidation = () => {
+//   const formList = Array.from(document.querySelectorAll('.popup__form'));
+//   formList.forEach((formElement) => {
+//     formElement.addEventListener('submit', (evt) => {
+//       evt.preventDefault();
+//     });
+//     setEventListeners(formElement);
+//   });
+// }
