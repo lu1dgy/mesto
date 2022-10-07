@@ -42,11 +42,11 @@
       <h2 class="popup__title">Редактировать профиль</h2>
       <form name="dataForm" class="popup__form popup__form_type_name" novalidate>
         <label class="popup__label">
-          <input minlength="2" maxlength="40" name="name" id="profile-name" type="text" class="popup__text " required>
+          <input minlength="2" maxlength="40" name="name" id="profile-name" type="text" class="popup__text" placeholder="Имя" required>
           <span class="popup__input-error profile-name-error"></span>
         </label>
         <label class="popup__label">
-          <input minlength="2" maxlength="200" name="role" id="profile-role" type="text" class="popup__text " required>
+          <input minlength="2" maxlength="200" name="role" id="profile-role" type="text" class="popup__text" placeholder="Вид деятельности" required>
           <span class="popup__input-error profile-role-error"></span>
         </label>
         <button type="submit" class="popup__button popup__save-btn">Сохранить</button>
@@ -95,6 +95,7 @@
       <button type="button" class="card-item__delete-btn"></button>
     </li>
   </template>
+  <script src="./scripts/constants.js"></script>
   <script src="./scripts/validate.js"></script>
   <script src="./scripts/index.js"></script>
 </body>

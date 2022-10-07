@@ -4,7 +4,8 @@ const setting = {
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__text_type_error',
-  errorClass: 'popup__input-error_active'
+  errorClass: 'popup__input-error_active',
+  errorMessageClass: '.popup__input-error'
 }
 
 const showInputError = (formElement, inputElement, errorMessage, setting) => {
@@ -49,6 +50,17 @@ const enableValidation = (setting) => {
     });
     setEventListeners(formElement, setting);
   });
+}
+
+const resetValidationErrors = () => {
+  const errorList = Array.from(document.querySelectorAll(setting.errorMessageClass));
+  const inputList = Array.from(document.querySelectorAll(setting.inputSelector));
+  inputList.forEach((errorElement) => {
+    errorElement.classList.remove(setting.inputErrorClass)
+  })
+  errorList.forEach((errorElement) => {
+    errorElement.textContent = '';
+  })
 }
 
 const hasInvalidInput = (inputList, setting) => {
