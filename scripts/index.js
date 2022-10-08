@@ -91,7 +91,7 @@ function handlePhotoFormSubmit(evt) {
   addCard(titleInput.value, photoInput.value);
   photoForm.reset();
   closePopup(popupAddForm);
-  enableValidation(setting);
+  disableSubmitButton(popupAddForm);
 }
 
 function handleEscButton(evt) {

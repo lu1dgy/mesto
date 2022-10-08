@@ -63,14 +63,20 @@ const resetValidationErrors = () => {
   })
 }
 
-const hasInvalidInput = (inputList, setting) => {
+const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
   });
 }
 
+const disableSubmitButton = (popup) => {
+editBtn = popup.querySelector(setting.submitButtonSelector);
+editBtn.classList.add(setting.inactiveButtonClass);
+editBtn.setAttribute('disabled', '');
+}
+
 const toggleButtonState = (inputList, buttonElement, setting) => {
-  if (hasInvalidInput(inputList, setting)) {
+  if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(setting.inactiveButtonClass);
     buttonElement.setAttribute('disabled', '');
   } else {
