@@ -40,9 +40,9 @@ function openPhotoPopup(event) {
   openPopup(popupPhoto);
 }
 //запускает 6 карточек на страницу при загрузке из массива initialCards
-initialCards.forEach(item => {
-  list.append(createCard(item.name, item.link));
-})
+// initialCards.forEach(item => {
+//   list.append(createCard(item.name, item.link));
+// })
 
 function createCard(name, link) {
   const cardElement = template.cloneNode(true);
@@ -65,17 +65,17 @@ function deleteCard(event) {
   currentListItem.remove();
 }
 //добавляет слушатели к кнопкам
-function setListenersOnCardElements(element) {
-  const likeButton = element.querySelector('.card-item__like-btn');
-  likeButton.addEventListener('click', function () {
-    likeButton.classList.toggle('card-item__like-btn_active');
-  })
-  const deleteButton = element.querySelector('.card-item__delete-btn');
-  deleteButton.addEventListener('click', deleteCard);
+// function setListenersOnCardElements(element) {
+//   const likeButton = element.querySelector('.card-item__like-btn');
+//   likeButton.addEventListener('click', function () {
+//     likeButton.classList.toggle('card-item__like-btn_active');
+//   })
+//   const deleteButton = element.querySelector('.card-item__delete-btn');
+//   deleteButton.addEventListener('click', deleteCard);
 
-  const photoElement = element.querySelector('.card-item__image');
-  photoElement.addEventListener('click', openPhotoPopup);
-}
+//   const photoElement = element.querySelector('.card-item__image');
+//   photoElement.addEventListener('click', openPhotoPopup);
+// }
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
