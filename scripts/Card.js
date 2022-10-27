@@ -1,11 +1,12 @@
 
 class Card {
 
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
 
-    this._text = data.name;
-    this._image = data.link;
+    this._name = data.name;
+    this._link = data.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -21,15 +22,18 @@ class Card {
 
   generateCard() {
     this._element = this._getTemplate();
+    // Добавим данные
+    this._element.querySelector('.card-item__image').src = this._link;
+    this._element.querySelector('.card-item__text').textContent = this._name;
+    this._element.querySelector('.card-item__image').alt = this._name;
+    this._cardImage = this._element.querySelector('.card-item__image');
     //обработчики событий
     this._setEventListeners();
-    // Добавим данные
-    this._element.querySelector('.card-item__image').src = this._image;
-    this._element.querySelector('.card-item__text').textContent = this._text;
 
     // Вернём элемент наружу
     return this._element;
   }
+
   _setEventListeners() {
     this._element.querySelector('.card-item__like-btn').addEventListener('click', () => {
       this._handleLikeClick();
@@ -38,16 +42,23 @@ class Card {
     this._element.querySelector('.card-item__delete-btn').addEventListener('click', (event) => {
       event.target.closest('.card-item').remove();
     });
+
+    this._cardImage.addEventListener('click', () => {
+      this._handleCardClick(this._name, this._link)
+    });
+
+
   }
 
   _handleLikeClick() {
     this._element.querySelector('.card-item__like-btn').classList.toggle('card-item__like-btn_active');
   }
 
+
 }
 
 initialCards.forEach((item) => {
-  const card = new Card(item, '#photo-template');
+  const card = new Card(item, '#photo-template', handleCardClick);
   const cardElement = card.generateCard();
   list.append(cardElement);
 });
