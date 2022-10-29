@@ -1,5 +1,3 @@
-import { handleCardClick, list } from './index.js';
-import { initialCards } from './constants.js';
 class Card {
 
   constructor(data, templateSelector, handleCardClick) {
@@ -24,10 +22,11 @@ class Card {
   generateCard() {
     this._element = this._getTemplate();
     // Добавим данные
-    this._element.querySelector('.card-item__image').src = this._link;
-    this._element.querySelector('.card-item__text').textContent = this._name;
-    this._element.querySelector('.card-item__image').alt = this._name;
     this._cardImage = this._element.querySelector('.card-item__image');
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
+    this._element.querySelector('.card-item__text').textContent = this._name;
+    this._likeBtn = this._element.querySelector('.card-item__like-btn');
     //обработчики событий
     this._setEventListeners();
 
@@ -36,7 +35,7 @@ class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector('.card-item__like-btn').addEventListener('click', () => {
+    this._likeBtn.addEventListener('click', () => {
       this._handleLikeClick();
     });
 
@@ -52,16 +51,11 @@ class Card {
   }
 
   _handleLikeClick() {
-    this._element.querySelector('.card-item__like-btn').classList.toggle('card-item__like-btn_active');
+    this._likeBtn.classList.toggle('card-item__like-btn_active');
+
   }
 
 
 }
-
-initialCards.forEach((item) => {
-  const card = new Card(item, '#photo-template', handleCardClick);
-  const cardElement = card.generateCard();
-  list.append(cardElement);
-});
 
 export { Card }

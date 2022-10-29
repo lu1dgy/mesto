@@ -1,5 +1,5 @@
 import { Card } from './Card.js';
-import { setting } from './constants.js';
+import { setting, initialCards } from './constants.js';
 import { FormValidator } from './FormValidator.js';
 
 const editButton = document.querySelector('.profile__edit-btn');
@@ -19,7 +19,7 @@ const roleProfile = document.querySelector('.profile__role');
 const list = document.querySelector('.card__items');
 const photo = document.querySelector('.popup__image');
 const photoText = document.querySelector('.popup__image-name');
-const popupOverlay = document.querySelectorAll('.popup__overlay');
+const popupOverlays = document.querySelectorAll('.popup__overlay');
 const validationEditForm = new FormValidator(setting, popupEditForm);
 const validationAddForm = new FormValidator(setting, popupAddForm);
 
@@ -39,8 +39,14 @@ function handleCardClick(name, link) {
   photo.alt = name;
   openPopup(popupPhoto);
 }
+//отрисовывает начальные карточки
+initialCards.forEach((item) => {
+  const card = new Card(item, '#photo-template', handleCardClick);
+  const cardElement = card.generateCard();
+  list.append(cardElement);
+});
 
-function handleProfileFormSubmit(evt) {
+function handleProfileFormSubmit() {
   const nameValue = nameInput.value;
   const roleValue = roleInput.value;
   nameProfile.textContent = nameValue;
@@ -80,7 +86,7 @@ closeButtons.forEach((button) => {
 });
 
 
-popupOverlay.forEach((overlay) => {
+popupOverlays.forEach((overlay) => {
   overlay.addEventListener('click', handleOverlayClose)
 })
 
@@ -88,17 +94,23 @@ profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 
 //Функционал добавления карточки на сайт при отправке формы
+
+function createCard(item) {
+  // тут создаете карточку и возвращаете ее
+  const card = new Card(item, '#photo-template', handleCardClick);
+  const cardElement = card.generateCard()
+  return cardElement
+}
+
 function addCard(name, link) {
   const data = {
     name: name,
     link: link
   }
-  const template = new Card(data, '#photo-template', handleCardClick);
-  const templateElement = template.generateCard();
-  list.prepend(templateElement);
+  list.prepend(createCard(data));
 }
 
-function handlePhotoFormSubmit(evt) {
+function handlePhotoFormSubmit() {
   addCard(titleInput.value, photoInput.value);
   photoForm.reset();
   closePopup(popupAddForm);

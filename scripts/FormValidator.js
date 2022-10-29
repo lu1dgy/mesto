@@ -4,13 +4,18 @@ export class FormValidator {
     this._setting = setting;
     this._form = form;
     this._buttonElement = this._form.querySelector(this._setting.submitButtonSelector)
-    this._inputList = this._form.querySelectorAll(this._setting.inputSelector);
+    this._inputList = Array.from(this._form.querySelectorAll(this._setting.inputSelector));
   }
+
   _toggleButtonState() {
-    const isValid = this._inputList[0].checkValidity() && this._inputList[1].checkValidity() //????
-    this._buttonElement.classList.toggle(this._setting.inactiveButtonClass, !isValid)
-    this._buttonElement.disabled = !isValid
+    //проверяем все ли поля валидны
+   const isValid = this._inputList.every((inputElement) => {
+     return inputElement.checkValidity() === true;
+    })
+    this._buttonElement.classList.toggle(this._setting.inactiveButtonClass, !isValid);
+    this._buttonElement.disabled = !isValid;
   }
+
   _showInputError(inputElement) {
     const errorElement = this._form.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._setting.inputErrorClass);
