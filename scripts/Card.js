@@ -1,4 +1,5 @@
-
+import { handleCardClick, list } from './index.js';
+import { initialCards } from './constants.js';
 class Card {
 
   constructor(data, templateSelector, handleCardClick) {
@@ -62,3 +63,5 @@ initialCards.forEach((item) => {
   const cardElement = card.generateCard();
   list.append(cardElement);
 });
+
+export { Card }
