@@ -48,6 +48,7 @@ function handleProfileFormSubmit(evt) {
   closePopup(popupEditForm);
 }
 
+
 function handleEscButton(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened')
