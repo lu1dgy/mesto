@@ -39,12 +39,6 @@ function handleCardClick(name, link) {
   photo.alt = name;
   openPopup(popupPhoto);
 }
-//отрисовывает начальные карточки
-initialCards.forEach((item) => {
-  const card = new Card(item, '#photo-template', handleCardClick);
-  const cardElement = card.generateCard();
-  list.append(cardElement);
-});
 
 function handleProfileFormSubmit() {
   const nameValue = nameInput.value;
@@ -67,6 +61,39 @@ function handleOverlayClose() {
   closePopup(openedPopup);
 }
 
+//Функционал создания и добавления карточки на сайт при отправке формы
+function createCard(item) {
+  // тут создаете карточку и возвращаете ее
+  const card = new Card(item, '#photo-template', handleCardClick);
+  const cardElement = card.generateCard()
+  return cardElement
+}
+// добавляет карточку на страницу с заданным объектом
+function addCard(name, link) {
+  const data = {
+    name: name,
+    link: link
+  }
+  list.prepend(createCard(data));
+}
+// функционал отправки формы с кнопкой создать
+function handlePhotoFormSubmit() {
+  addCard(titleInput.value, photoInput.value);
+  photoForm.reset();
+  closePopup(popupAddForm);
+}
+//отрисовывает начальные карточки
+initialCards.forEach((initialCards) => {
+  list.prepend(createCard(initialCards));
+});
+
+
+// слушатели на отправку формы
+photoForm.addEventListener('submit', handlePhotoFormSubmit);
+profileForm.addEventListener('submit', handleProfileFormSubmit);
+
+
+// слушатели на нажатие кнопок
 editButton.addEventListener('click', () => {
   openPopup(popupEditForm);
   validationEditForm.resetValidationErrors();
@@ -78,7 +105,6 @@ addButton.addEventListener('click', () => {
   openPopup(popupAddForm);
   validationAddForm.resetValidationErrors();
 });
-//При нажатии на кнопку 'крестик' закрывает попап
 
 closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
@@ -90,33 +116,8 @@ popupOverlays.forEach((overlay) => {
   overlay.addEventListener('click', handleOverlayClose)
 })
 
-profileForm.addEventListener('submit', handleProfileFormSubmit);
 
 
-//Функционал добавления карточки на сайт при отправке формы
-
-function createCard(item) {
-  // тут создаете карточку и возвращаете ее
-  const card = new Card(item, '#photo-template', handleCardClick);
-  const cardElement = card.generateCard()
-  return cardElement
-}
-
-function addCard(name, link) {
-  const data = {
-    name: name,
-    link: link
-  }
-  list.prepend(createCard(data));
-}
-
-function handlePhotoFormSubmit() {
-  addCard(titleInput.value, photoInput.value);
-  photoForm.reset();
-  closePopup(popupAddForm);
-}
-
-photoForm.addEventListener('submit', handlePhotoFormSubmit);
 validationEditForm.enableValidation();
 validationAddForm.enableValidation();
 export { handleCardClick, list }

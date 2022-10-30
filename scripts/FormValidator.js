@@ -9,8 +9,8 @@ export class FormValidator {
 
   _toggleButtonState() {
     //проверяем все ли поля валидны
-   const isValid = this._inputList.every((inputElement) => {
-     return inputElement.checkValidity() === true;
+    const isValid = this._inputList.every((inputElement) => {
+      return inputElement.checkValidity() === true;
     })
     this._buttonElement.classList.toggle(this._setting.inactiveButtonClass, !isValid);
     this._buttonElement.disabled = !isValid;
