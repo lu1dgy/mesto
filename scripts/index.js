@@ -1,6 +1,10 @@
 import { Card } from './Card.js';
-import { setting, initialCards } from './constants.js';
+import {
+  setting,
+  initialCards
+} from './constants.js';
 import { FormValidator } from './FormValidator.js';
+import Section from './Section.js';
 
 const editButton = document.querySelector('.profile__edit-btn');
 const addButton = document.querySelector('.profile__add-btn');
@@ -16,12 +20,27 @@ const titleInput = document.querySelector('#profile-description');
 const photoInput = document.querySelector('#profile-photo');
 const nameProfile = document.querySelector('.profile__name');
 const roleProfile = document.querySelector('.profile__role');
-const list = document.querySelector('.card__items');
+const list = '.card__items'
 const photo = document.querySelector('.popup__image');
 const photoText = document.querySelector('.popup__image-name');
 const popupOverlays = document.querySelectorAll('.popup__overlay');
 const validationEditForm = new FormValidator(setting, popupEditForm);
 const validationAddForm = new FormValidator(setting, popupAddForm);
+
+
+const cardList = new Section({
+  items: initialCards,
+  renderer: (item) => {
+    cardList.addItem(createCard(item));
+  }
+}, list);
+
+//создание новой карточки
+function createCard(item) {
+  const card = new Card(item, '#photo-template', handleCardClick);
+  const cardElement = card.generateCard()
+  return cardElement
+}
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -48,7 +67,6 @@ function handleProfileFormSubmit() {
   closePopup(popupEditForm);
 }
 
-
 function handleEscButton(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened')
@@ -61,32 +79,14 @@ function handleOverlayClose() {
   closePopup(openedPopup);
 }
 
-//Функционал создания и добавления карточки на сайт при отправке формы
-function createCard(item) {
-  // тут создаете карточку и возвращаете ее
-  const card = new Card(item, '#photo-template', handleCardClick);
-  const cardElement = card.generateCard()
-  return cardElement
-}
-// добавляет карточку на страницу с заданным объектом
-function addCard(name, link) {
-  const data = {
-    name: name,
-    link: link
-  }
-  list.prepend(createCard(data));
-}
+
+
 // функционал отправки формы с кнопкой создать
 function handlePhotoFormSubmit() {
-  addCard(titleInput.value, photoInput.value);
+  cardList.addItem(createCard({name: titleInput.value,link: photoInput.value}))
   photoForm.reset();
   closePopup(popupAddForm);
 }
-//отрисовывает начальные карточки
-initialCards.forEach((initialCards) => {
-  list.prepend(createCard(initialCards));
-});
-
 
 // слушатели на отправку формы
 photoForm.addEventListener('submit', handlePhotoFormSubmit);
@@ -122,3 +122,5 @@ validationEditForm.enableValidation();
 validationAddForm.enableValidation();
 export { handleCardClick, list }
 
+//отрисовывает начальные карточки из переменной initialCards
+cardList.renderItems();
