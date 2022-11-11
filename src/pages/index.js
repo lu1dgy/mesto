@@ -1,4 +1,4 @@
-import Card from './Card.js';
+import Card from '../components/Card.js';
 import {
   setting,
   initialCards,
@@ -10,12 +10,12 @@ import {
   nameProfile,
   roleProfile,
   list
-} from './constants.js';
-import FormValidator from './FormValidator.js';
-import Section from './Section.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm.js';
-import UserInfo from './UserInfo.js';
+} from '../utils/constants.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
 //создание валидации для форм
 const validationEditForm = new FormValidator(setting, popupEditForm);
 const validationAddForm = new FormValidator(setting, popupAddForm);
@@ -23,7 +23,8 @@ const validationAddForm = new FormValidator(setting, popupAddForm);
 const UserInformation = new UserInfo(nameProfile, roleProfile);
 const popupWithImage = new PopupWithImage(popupPhoto)
 const popupProfile = new PopupWithForm(popupEditForm, addUserInfo);
-const popupCard = new PopupWithForm(popupAddForm, addCard)
+const popupCard = new PopupWithForm(popupAddForm, addCard);
+
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {

@@ -7,18 +7,18 @@
   <meta name="author" content="Александр Лапкес">
   <meta name="description" content="">
   <meta name="keywords" content="">
-  <link href="./pages/index.css" rel="stylesheet" type="text/css">
+  <link href="./src/pages/index.css" rel="stylesheet" type="text/css">
   <title>Место</title>
 </head>
 
 <body class="page">
   <header class="header">
-    <img class="header__logo" src="./images/header-logo.svg" alt="логотип место">
+    <img class="header__logo" src="./src/images/header-logo.svg" alt="логотип место">
   </header>
   <main>
     <section class="profile">
       <div class="profile__card">
-        <img src="./images/avatar.jpg" class="profile__avatar" alt="аватар">
+        <img src="./src/images/avatar.jpg" class="profile__avatar" alt="аватар">
         <div class="profile__info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__edit-btn" type="button"></button>
@@ -95,15 +95,15 @@
       <button type="button" class="card-item__delete-btn"></button>
     </li>
   </template>
-  <script type="module" src="./scripts/Card.js"></script>
-  <script type="module" src="./scripts/FormValidator.js"></script>
-  <script type="module" src="./scripts/constants.js"></script>
-  <script type="module" src="./scripts/Section.js"></script>
-  <script type="module" src="./scripts/Popup.js"></script>
-  <script type="module" src="./scripts/PopupWithImage.js"></script>
-  <script type="module" src="./scripts/PopupWithForm.js"></script>
-  <script type="module" src="./scripts/UserInfo.js"></script>
-  <script type="module" src="./scripts/index.js"></script>
+  <script type="module" src="./src/components/Card.js"></script>
+  <script type="module" src="./src/components/FormValidator.js"></script>
+  <script type="module" src="./src/utils/constants.js"></script>
+  <script type="module" src="./src/components/Section.js"></script>
+  <script type="module" src="./src/components/Popup.js"></script>
+  <script type="module" src="./src/components/PopupWithImage.js"></script>
+  <script type="module" src="./src/components/PopupWithForm.js"></script>
+  <script type="module" src="./src/components/UserInfo.js"></script>
+  <script type="module" src="./src/pages/index.js"></script>
 </body>
 
 </html>
