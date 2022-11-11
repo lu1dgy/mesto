@@ -35,4 +35,13 @@ const setting = {
   errorMessageClass: '.popup__input-error'
 }
 
-export {initialCards, setting}
+const editButton = document.querySelector('.profile__edit-btn');
+const addButton = document.querySelector('.profile__add-btn');
+const popupEditForm = document.querySelector('.popupEditForm');
+const popupAddForm = document.querySelector('.popupAddForm');
+const popupPhoto = document.querySelector('.popup_type_photo');
+const nameProfile = document.querySelector('.profile__name');
+const roleProfile = document.querySelector('.profile__role');
+const list = '.card__items'
+
+export {initialCards, setting, editButton, addButton, popupEditForm, popupAddForm, popupPhoto, nameProfile, roleProfile, list}

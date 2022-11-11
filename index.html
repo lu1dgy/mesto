@@ -61,12 +61,12 @@
       <h2 class="popup__title">Новое место</h2>
       <form name="dataForm" class="popup__form popup__form_type_photo" novalidate>
         <label class="popup__label">
-          <input name="description" id="profile-description" type="text" class="popup__text" placeholder="Название"
+          <input name="name" id="profile-description" type="text" class="popup__text" placeholder="Название"
             required>
           <span class="popup__input-error profile-description-error"></span>
         </label>
         <label class="popup__label">
-          <input name="photo" id="profile-photo" type="url" class="popup__text" placeholder="Ссылка на картинку"
+          <input name="link" id="profile-photo" type="url" class="popup__text" placeholder="Ссылка на картинку"
             required>
           <span class="popup__input-error profile-photo-error"></span>
         </label>
@@ -99,6 +99,10 @@
   <script type="module" src="./scripts/FormValidator.js"></script>
   <script type="module" src="./scripts/constants.js"></script>
   <script type="module" src="./scripts/Section.js"></script>
+  <script type="module" src="./scripts/Popup.js"></script>
+  <script type="module" src="./scripts/PopupWithImage.js"></script>
+  <script type="module" src="./scripts/PopupWithForm.js"></script>
+  <script type="module" src="./scripts/UserInfo.js"></script>
   <script type="module" src="./scripts/index.js"></script>
 </body>
 
