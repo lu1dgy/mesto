@@ -42,6 +42,7 @@ const popupAddForm = document.querySelector('.popupAddForm');
 const popupPhoto = document.querySelector('.popup_type_photo');
 const nameProfile = document.querySelector('.profile__name');
 const roleProfile = document.querySelector('.profile__role');
+const avatarProfile = document.querySelector('.profile__avatar');
 const list = '.card__items'
 
-export {initialCards, setting, editButton, addButton, popupEditForm, popupAddForm, popupPhoto, nameProfile, roleProfile, list}
+export {initialCards, setting, editButton, addButton, popupEditForm, popupAddForm, popupPhoto, nameProfile, roleProfile, avatarProfile, list}

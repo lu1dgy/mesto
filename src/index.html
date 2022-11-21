@@ -16,11 +16,11 @@
   <main>
     <section class="profile">
       <div class="profile__card">
-        <img src="<%=require('./images/avatar.jpg')%>" class="profile__avatar" alt="аватар">
+        <img class="profile__avatar" alt="аватар">
         <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <h1 class="profile__name"></h1>
           <button class="profile__edit-btn" type="button"></button>
-          <p class="profile__role">Исследователь океана</p>
+          <p class="profile__role"></p>
         </div>
       </div>
       <button class="profile__add-btn" type="button"></button>
@@ -44,7 +44,7 @@
           <span class="popup__input-error profile-name-error"></span>
         </label>
         <label class="popup__label">
-          <input minlength="2" maxlength="200" name="role" id="profile-role" type="text" class="popup__text" placeholder="Вид деятельности" required>
+          <input minlength="2" maxlength="200" name="about" id="profile-role" type="text" class="popup__text" placeholder="Вид деятельности" required>
           <span class="popup__input-error profile-role-error"></span>
         </label>
         <button type="submit" class="popup__button popup__save-btn">Сохранить</button>
