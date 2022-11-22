@@ -12,6 +12,7 @@
 4) Grid
 5) BEM 
 6) JS
+7) API
 
 Ссылка на сайт: https://lu1dgy.github.io/mesto/
 
