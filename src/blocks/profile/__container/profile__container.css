@@ -1,0 +1,6 @@
+.profile__container {
+  background-image: url(../../../images/edit-btn.svg);
+  background-position: 40%;
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+}

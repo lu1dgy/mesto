@@ -10,15 +10,11 @@ export default class Section {
     this._container.innerHTML = '';
   }
 
-  addItem(element) {
+  addItemUser(element) {
     this._container.prepend(element);
   }
-
-  renderItems() {
-    this.clear();
-    this._renderedItems.forEach((item) => {
-      this._renderer(item)
-    })
-
+  //чтобы при обновлении страницы карточка не уходила вниз
+  addItemServer(element) {
+    this._container.append(element);
   }
 }
