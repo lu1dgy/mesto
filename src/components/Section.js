@@ -17,4 +17,11 @@ export default class Section {
   addItemServer(element) {
     this._container.append(element);
   }
+
+  renderItems(data) {
+    this.clear();
+    data.forEach((item) => {
+      this._renderer(item)
+    })
+  }
 }

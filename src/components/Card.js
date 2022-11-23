@@ -41,11 +41,10 @@ export default class Card {
     this._deleteBtn = this._element.querySelector('.card-item__delete-btn');
     this._likeCounter = this._element.querySelector('.card-item__like-counter');
     this._likeCounter.textContent = `${this._likes.length}`;
-
     this._setEventListeners();
+
     this.isLiked();
     this.isOwner();
-
     return this._element;
   }
 
@@ -70,15 +69,11 @@ export default class Card {
     this._likeBtn.classList.remove('card-item__like-btn_active');
   }
 
-
-
   isOwner() {
     if (this._userId !== this._ownerId) {
       this._deleteBtn.remove()
     }
   }
-
-
 
   _handleLikeClick(id) {
     if (this._likeBtn.classList.contains('card-item__like-btn_active')) {
@@ -86,7 +81,6 @@ export default class Card {
     } else {
       this._addLike(id)
     }
-    this._likeBtn.classList.toggle('card-item__like-btn_active');
   }
 
   _setEventListeners() {

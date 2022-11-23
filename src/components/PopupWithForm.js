@@ -30,8 +30,8 @@ export default class PopupWithForm extends Popup {
     this._form.reset();
   }
 
-  newSubmitCallBack(changed) {
-    this._submitCallBack = changed;
+  setNewSubmitCallBack(newHandler) {
+    this._submitCallBack = newHandler;
   }
 
   setEventListeners() {

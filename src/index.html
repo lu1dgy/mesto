@@ -41,7 +41,7 @@
     <div class="popup__container">
       <button type="button" class="popup__close-btn"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form name="dataForm" class="popup__form popup__form_type_name" novalidate>
+      <form name="profile-form" class="popup__form popup__form_type_name" novalidate>
         <label class="popup__label">
           <input minlength="2" maxlength="40" name="name" id="profile-name" type="text" class="popup__text"
             placeholder="Имя" required>
@@ -62,7 +62,7 @@
     <div class="popup__container">
       <button type="button" class="popup__close-btn"></button>
       <h2 class="popup__title">Новое место</h2>
-      <form name="dataForm" class="popup__form popup__form_type_photo" novalidate>
+      <form name="add-form" class="popup__form popup__form_type_photo" novalidate>
         <label class="popup__label">
           <input name="name" id="profile-description" type="text" class="popup__text" placeholder="Название" required>
           <span class="popup__input-error profile-description-error"></span>
@@ -90,7 +90,7 @@
   <div class="popup popupConfirmForm">
     <div class="popup__container">
       <button type="button" class="popup__close-btn"></button>
-      <form name="dataForm" class="popup__form">
+      <form name="confrim-form" class="popup__form">
         <h2 class="popup__title popup__title_confirm">Вы уверены?</h2>
         <button type="submit" class="popup__button popup__save-btn">Да</button>
       </form>
@@ -101,7 +101,7 @@
     <div class="popup__container">
       <button type="button" class="popup__close-btn"></button>
       <h2 class="popup__title popup__title_avatar">Обновить аватар</h2>
-      <form name="dataForm" class="popup__form popup__form_avatar">
+      <form name="avatar-form" class="popup__form popup__form_avatar">
         <label class="popup__label">
           <input name="link" id="profile-avatar" type="url" class="popup__text" placeholder="Ссылка на картинку"
             required>

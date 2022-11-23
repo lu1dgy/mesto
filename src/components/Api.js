@@ -4,7 +4,7 @@ export default class Api {
     this._headers = headers
   }
 
-  _error(res) {
+  _checkResponse(res) {
     if (res.ok) {
       return res.json()
     } else {
@@ -13,11 +13,11 @@ export default class Api {
   }
 
   getUserInfo() {
-    return fetch(`${this._url}users/me`, { headers: this._headers }).then(this._error)
+    return fetch(`${this._url}users/me`, { headers: this._headers }).then(this._checkResponse)
   }
 
   getInitialCards() {
-    return fetch(`${this._url}cards`, { headers: this._headers }).then(this._error)
+    return fetch(`${this._url}cards`, { headers: this._headers }).then(this._checkResponse)
   }
 
   getData() {
@@ -31,7 +31,7 @@ export default class Api {
       body: JSON.stringify({ avatar })
 
     })
-      .then(this._error)
+      .then(this._checkResponse)
   }
 
   setUserInfo(name, about) {
@@ -45,7 +45,7 @@ export default class Api {
           about
         })
       })
-      .then(this._error)
+      .then(this._checkResponse)
   }
 
   postUserCard(post) {
@@ -58,7 +58,7 @@ export default class Api {
           name: post.name
         })
       })
-      .then(this._error)
+      .then(this._checkResponse)
   }
 
   addLike(likeId) {
@@ -67,7 +67,7 @@ export default class Api {
         method: 'PUT',
         headers: this._headers
       })
-      .then(this._error)
+      .then(this._checkResponse)
   }
 
   removeLike(likeId) {
@@ -76,7 +76,7 @@ export default class Api {
         method: 'DELETE',
         headers: this._headers
       })
-      .then(this._error)
+      .then(this._checkResponse)
   }
 
   removeCard(cardId) {
@@ -85,7 +85,7 @@ export default class Api {
         method: 'DELETE',
         headers: this._headers
       })
-      .then(this._error)
+      .then(this._checkResponse)
   }
 
 

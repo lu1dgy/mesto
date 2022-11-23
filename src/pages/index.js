@@ -20,12 +20,8 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
-//создание валидации для форм
-const validationEditForm = new FormValidator(setting, popupEditForm);
-const validationAddForm = new FormValidator(setting, popupAddForm);
-const validationAvatarForm = new FormValidator(setting, popupAvatar)
 
-const UserInformation = new UserInfo(nameProfile, roleProfile, avatarProfile);
+const userInformation = new UserInfo(nameProfile, roleProfile, avatarProfile);
 const popupWithImage = new PopupWithImage(popupPhoto)
 const popupProfile = new PopupWithForm(popupEditForm, addUserInfo);
 const popupCard = new PopupWithForm(popupAddForm, addCard);
@@ -45,11 +41,9 @@ api.getData()
   .then(([user, data]) => {
     //наполнили ее моим id
     idUser = user._id
-    UserInformation.setUserInfo(user)
-    UserInformation.setUserAvatar(user.avatar)
-    data.forEach((element) => {
-      cardList.addItemServer(createCard(element));
-    })
+    userInformation.setUserInfo(user)
+    userInformation.setUserAvatar(user.avatar)
+    cardList.renderItems(data)
   })
   .catch((err) => {
     console.log(err);
@@ -68,11 +62,14 @@ function addUserInfo(data) {
   const { name, about } = data;
   api.setUserInfo(name, about)
     .then((user) => {
-      UserInformation.setUserInfo(user);
+      userInformation.setUserInfo(user);
       popupProfile.close()
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      popupProfile.load(false);
     });
 }
 
@@ -85,18 +82,25 @@ function addCard(post) {
     })
     .catch((err) => {
       console.log(err);
-    });
+    })
+    .finally(() => {
+      popupCard.load(false)
+    })
+    ;
 }
 
 function addAvatar(image) {
   popupAvatarForm.load(true)
   api.getUserAvatar(image.link)
     .then((res) => {
-      UserInformation.setUserAvatar(res.avatar)
+      userInformation.setUserAvatar(res.avatar)
       popupAvatarForm.close()
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      popupAvatarForm.load(false);
     });
 }
 
@@ -114,6 +118,9 @@ function createCard(data) {
         })
         .catch((err) => {
           console.log(err);
+        })
+        .finally(() => {
+          card.addLike()
         });
     },
     (id) => {
@@ -123,11 +130,14 @@ function createCard(data) {
         })
         .catch((err) => {
           console.log(err);
+        })
+        .finally(() => {
+          card.removeLike()
         });
     },
     (id) => {
       popupConfirmForm.open()
-      popupConfirmForm.newSubmitCallBack(() => {
+      popupConfirmForm.setNewSubmitCallBack(() => {
         api.removeCard(id)
           .then(() => {
             card.deleteCard()
@@ -148,22 +158,19 @@ function openPhoto(name, link) {
 }
 // слушатели на нажатие кнопок
 editButton.addEventListener('click', () => {
-  validationEditForm.resetValidationErrors();
-  popupProfile.load(false);
-  const userData = UserInformation.getUserInfo();
+  formValidators['profile-form'].resetValidationErrors()
+  const userData = userInformation.getUserInfo();
   popupProfile.setInputValue(userData)
   popupProfile.open();
 });
 addButton.addEventListener('click', () => {
-  validationAddForm.resetValidationErrors();
-  popupCard.load(false)
+  formValidators['add-form'].resetValidationErrors()
   popupCard.open();
 });
 
 avatarProfile.addEventListener('click', () => {
   popupAvatarForm.open();
-  validationAvatarForm.resetValidationErrors()
-  popupAvatarForm.load(false)
+  formValidators['avatar-form'].resetValidationErrors();
 })
 
 //слушатели попапов наввешиваем
@@ -172,9 +179,22 @@ popupWithImage.setEventListeners();
 popupProfile.setEventListeners();
 popupConfirmForm.setEventListeners()
 popupAvatarForm.setEventListeners();
-//включаем валидацию форм
-validationEditForm.enableValidation();
-validationAddForm.enableValidation();
-validationAvatarForm.enableValidation();
+
+// Включение валидации
+const formValidators = {}
+const enableValidation = (setting) => {
+  const formList = Array.from(document.querySelectorAll(setting.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(setting, formElement)
+    // получаем данные из атрибута `name` у формы
+    const formName = formElement.getAttribute('name')
+
+    // вот тут в объект записываем под именем формы
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(setting);
 
 export { openPhoto, list }
