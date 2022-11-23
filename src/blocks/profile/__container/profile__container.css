@@ -4,3 +4,9 @@
   background-size: 24px 24px;
   background-repeat: no-repeat;
 }
+
+@media screen and (max-width: 1023px) {
+  .profile__container {
+    background-position: 50%;
+  }
+}

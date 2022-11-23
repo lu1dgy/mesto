@@ -119,7 +119,7 @@ function createCard(data) {
         })
         .catch((err) => {
           console.log(err);
-        })
+        });
     },
     (id) => {
       api.removeLike(id)
