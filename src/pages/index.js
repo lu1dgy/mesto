@@ -115,25 +115,21 @@ function createCard(data) {
       api.addLike(id)
         .then((res) => {
           card.setLikeCount(res);
+          card.addLike()
         })
         .catch((err) => {
           console.log(err);
         })
-        .finally(() => {
-          card.addLike()
-        });
     },
     (id) => {
       api.removeLike(id)
         .then((res) => {
           card.setLikeCount(res)
+          card.removeLike()
         })
         .catch((err) => {
           console.log(err);
         })
-        .finally(() => {
-          card.removeLike()
-        });
     },
     (id) => {
       popupConfirmForm.open()
