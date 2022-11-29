@@ -1,7 +1,7 @@
 <h1>Mesto</h1>
 
 <h2>Description:</h2>
-<p>It's my current project</p>
+<p>This is my current project.</p>
 <p>It's a one-page website, where you can add or delete cards moreover you can edit your profile name and avatar.</p>
 
 <h3>Technologies:</h3>
