@@ -1,10 +1,11 @@
 <h1>Mesto</h1>
 
-<h2>Description</h2>
-<p>It's a one-page website, where you can add or delete cards moreover you can edit your profile name and avatar</p>
+<h2>Description:</h2>
+<p>It's my current project</p>
+<p>It's a one-page website, where you can add or delete cards moreover you can edit your profile name and avatar.</p>
 
-<h3>Technologies</h3>
-<p>This page has adaptive layout</p>
+<h3>Technologies:</h3>
+<p>This page has adaptive layout.</p>
 <ul>
 <li>JavaScript</li>
 <li>API</li>
